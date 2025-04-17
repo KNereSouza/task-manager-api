@@ -1,0 +1,19 @@
+{
+  "name": "newapi",
+  "version": "1.0.0",
+  "description": "A simple web app to manage tasks.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch ."
+  },
+  "author": "KNereS",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
