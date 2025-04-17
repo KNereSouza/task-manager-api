@@ -1,6 +1,12 @@
+// Dependencies
 import express from "express";
 import { configDotenv } from "dotenv";
+
+// Importing the router
 import router from "./routes/routes.js";
+
+// Importing the database connection
+import { connectToDatabase } from "./config/database.js";
 
 // Load environment variables from .env file
 configDotenv();
@@ -13,6 +19,9 @@ app.use(express.json());
 
 // Configure routes
 app.use("/api", router);
+
+// Connect to the database
+connectToDatabase();
 
 // Start the server
 app.listen(PORT, () => {
