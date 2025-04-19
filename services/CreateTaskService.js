@@ -8,12 +8,12 @@ import { saveTask } from "../repositories/TaskRepository.js";
 export default class CreateTaskService {
   /**
    * Handles the creation of a new task.
-   * @param {Object} taskData - The data for the new task.
-   * @param {string} taskData.name - The name of the task.
-   * @param {string} taskData.description - The description of the task.
-   * @param {string} taskData.status - The status of the task (e.g., "pending", "completed").
-   * @returns {Promise<Task>} The created task.
-   * @throws {Error} If validation fails or the database operation fails.
+   * @param   { Object } taskData - The data for the new task.
+   * @param   { string } taskData.name - The name of the task.
+   * @param   { string } taskData.description - The description of the task.
+   * @param   { string } taskData.status - The status of the task (e.g., "pending", "completed").
+   * @returns { Promise<Task> } The created task.
+   * @throws  { Error } If validation fails or the database operation fails.
    */
   async handle({ name, description, status }) {
     if (!name || !description || !status) {

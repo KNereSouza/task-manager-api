@@ -5,10 +5,10 @@
 export default class Task {
   /**
    * Creates an instance of Task.
-   * @param {number|string} id - The unique identifier for the task.
-   * @param {string} name - The name of the task.
-   * @param {string} description - A detailed description of the task.
-   * @param {string} status - The current status of the task (e.g., "pending", "completed").
+   * @param { number|string } id - The unique identifier for the task.
+   * @param { string } name - The name of the task.
+   * @param { string } description - A detailed description of the task.
+   * @param { string } status - The current status of the task (e.g., "pending", "completed").
    */
   constructor(id, name, description, status) {
     this.id = id;
@@ -19,12 +19,12 @@ export default class Task {
 
   /**
    * Creates a Task instance from a JSON object.
-   * @param {Object} json - The JSON object containing task data.
-   * @param {number|string} json.id - The unique identifier for the task.
-   * @param {string} json.name - The name of the task.
-   * @param {string} json.description - A detailed description of the task.
-   * @param {string} json.status - The current status of the task.
-   * @returns {Task} A new Task instance.
+   * @param   { Object } json - The JSON object containing task data.
+   * @param   { number|string } json.id - The unique identifier for the task.
+   * @param   { string } json.name - The name of the task.
+   * @param   { string } json.description - A detailed description of the task.
+   * @param   { string } json.status - The current status of the task.
+   * @returns { Task } A new Task instance.
    */
   static createFromJSON(json) {
     return new Task(json.id, json.name, json.description, json.status);
@@ -32,11 +32,11 @@ export default class Task {
 
   /**
    * Converts the Task instance to a JSON object.
-   * @returns {Object} A JSON representation of the Task.
-   * @returns {number|string} return.id - The unique identifier for the task.
-   * @returns {string} return.name - The name of the task.
-   * @returns {string} return.description - A detailed description of the task.
-   * @returns {string} return.status - The current status of the task.
+   * @returns { Object } A JSON representation of the Task.
+   * @returns { number|string } return.id - The unique identifier for the task.
+   * @returns { string } return.name - The name of the task.
+   * @returns { string } return.description - A detailed description of the task.
+   * @returns { string } return.status - The current status of the task.
    */
   toJSON() {
     return {

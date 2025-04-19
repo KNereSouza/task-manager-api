@@ -3,9 +3,9 @@ import CreateTaskService from "../services/CreateTaskService.js";
 export default class CreateTaskController {
   /**
    * Handles the HTTP request to create a new task.
-   * @param {Object} request - The HTTP request object.
-   * @param {Object} response - The HTTP response object.
-   * @returns {Promise<Object>} The HTTP response with the created task.
+   * @param   { Object } request - The HTTP request object.
+   * @param   { Object } response - The HTTP response object.
+   * @returns { Promise<Object> } The HTTP response with the created task.
    */
   async handle(request, response) {
     // Extract task data from the request

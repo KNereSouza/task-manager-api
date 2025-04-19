@@ -2,9 +2,9 @@ import { getDatabase } from "../config/database.js";
 
 /**
  * Saves a task from the database
- * @param { Task } task - the task to save
+ * @param   { Task } task - the task to save
  * @returns { Promise<void> }
- * @throws { Error } if the database operation fails
+ * @throws  { Error } if the database operation fails
  */
 async function saveTask(task) {
   try {
