@@ -1,15 +1,23 @@
-import { v7 as uuid } from "uuid";
+import { v4 as uuid } from "uuid";
 import Task from "../models/Task.js";
-import { getDatabase } from "../config/database.js";
+import { saveTask } from "../repositories/TaskRepository.js";
 
+/**
+ * Service responsible for creating and saving tasks to the database.
+ */
 export default class CreateTaskService {
-  async handle(request, response) {
-    const { name, description, status } = request.body;
-
+  /**
+   * Handles the creation of a new task.
+   * @param {Object} taskData - The data for the new task.
+   * @param {string} taskData.name - The name of the task.
+   * @param {string} taskData.description - The description of the task.
+   * @param {string} taskData.status - The status of the task (e.g., "pending", "completed").
+   * @returns {Promise<Task>} The created task.
+   * @throws {Error} If validation fails or the database operation fails.
+   */
+  async handle({ name, description, status }) {
     if (!name || !description || !status) {
-      return response.status(400).json({
-        message: "All fiels are required.",
-      });
+      throw new Error("All fields are required.");
     }
 
     // Create a new task instance
@@ -17,17 +25,12 @@ export default class CreateTaskService {
 
     // Save the task to the database
     try {
-      const db = getDatabase();
-      const tasksCollection = db.collection(process.env.DB_COLLECTION);
-      await tasksCollection.insertOne(task.toJSON());
-      console.log("Task saved to database:", task.toJSON());
+      await saveTask(task); // Await the asynchronous operation
     } catch (error) {
-      console.error("Error saving task to database:", error);
-      return response.status(500).json({
-        message: "Internal server error",
-      });
+      console.log("Error at saving task to database:", error);
+      throw new Error("Failed to save task to the database.");
     }
 
-    return task;
+    return task; // Return the created task
   }
 }

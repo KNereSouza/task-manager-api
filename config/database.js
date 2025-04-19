@@ -11,7 +11,7 @@ const client = new MongoClient(databaseUrl);
  * Connects to the MongoDB database.
  * @returns {Promise<MongoClient>}
  */
-export async function connectToDatabase() {
+async function connectToDatabase() {
   try {
     await client.connect();
     console.log("Connected to the database");
@@ -22,7 +22,9 @@ export async function connectToDatabase() {
   }
 }
 
-export function getDatabase() {
+function getDatabase() {
   console.log("Getting database: ", process.env.DB_NAME);
   return client.db(process.env.DB_NAME);
 }
+
+export { connectToDatabase, getDatabase };
