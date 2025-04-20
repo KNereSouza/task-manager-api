@@ -19,7 +19,15 @@ async function saveTask(task) {
 }
 
 async function getAllTasks() {
-  // Function to retrieve all tasks from the database will be implemented here in the future.
+  try {
+    const db = getDatabase();
+    const tasksCollection = db.collection(process.env.DB_COLLECTION);
+    const data = await tasksCollection.find().toArray();
+    return data;
+  } catch (error) {
+    console.error("Error at query all registers from the database.", error);
+    throw new Error("Failed to query all tasks on the database.");
+  }
 }
 
 async function deleteTask(id) {
