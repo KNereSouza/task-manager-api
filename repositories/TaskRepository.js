@@ -18,6 +18,11 @@ async function saveTask(task) {
   }
 }
 
+/**
+ * Retrieves all tasks from the database
+ * @returns { Promise<Array<Object>> } - A promise that resolves to an array of task objects
+ * @throws  { Error } if the database operation fails
+ */
 async function getAllTasks() {
   try {
     const db = getDatabase();
