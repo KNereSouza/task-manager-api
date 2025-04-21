@@ -3,6 +3,7 @@ import { Router } from "express";
 // Importing the Controller
 import CreateTaskController from "../controllers/CreateTaskController.js";
 import GetAllTasksController from "../controllers/GetAllTasksController.js";
+import DeleteTaskController from "../controllers/DeleteTaskController.js";
 
 // Create a new router instance
 const router = Router();
@@ -25,6 +26,12 @@ router.get("/tasks", async (request, response) => {
 // Route to create an task
 router.post("/task", async (request, response) => {
   const controller = new CreateTaskController();
+  await controller.handle(request, response);
+});
+
+// Route to delete an task
+router.delete("/task", async (request, response) => {
+  const controller = new DeleteTaskController();
   await controller.handle(request, response);
 });
 
