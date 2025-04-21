@@ -9,10 +9,10 @@ export default class CreateTaskController {
    */
   async handle(request, response) {
     // Extract task data from the request
-    const { name, description, status } = request.body;
+    const { name, description } = request.body;
 
     // Basic validation in the controller
-    if (!name || !description || !status) {
+    if (!name || !description) {
       return response.status(400).json({ message: "All fields are required." });
     }
 
@@ -22,7 +22,7 @@ export default class CreateTaskController {
       const task = await createTaskService.handle({
         name,
         description,
-        status,
+        status: "pending",
       });
 
       // Return a sucess response
