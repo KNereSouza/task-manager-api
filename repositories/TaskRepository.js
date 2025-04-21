@@ -30,7 +30,10 @@ async function getAllTasks() {
     const data = await tasksCollection.find().toArray();
     return data;
   } catch (error) {
-    console.error("Error at query all registers from the database.", error);
+    console.error(
+      "[at Repository] Error at query all registers from the database.",
+      error
+    );
     throw new Error("Failed to query all tasks on the database.");
   }
 }
