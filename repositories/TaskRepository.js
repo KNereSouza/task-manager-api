@@ -38,8 +38,30 @@ async function getAllTasks() {
   }
 }
 
-async function deleteTask(id) {
-  // Implementation for deleting a task from the database will be done in the future.
+async function deleteTask(taskId) {
+  try {
+    const db = getDatabase();
+    const tasksCollection = db.collection(process.env.DB_COLLECTION);
+
+    const query = { id: taskId };
+    const result = await tasksCollection.deleteOne(query);
+
+    if (result.deletedCount === 1) {
+      console.log(
+        `Sucessfully deleted the task document with the id: ${taskId}`
+      );
+      return { id: taskId };
+    } else {
+      console.log(`No task document found with the id: ${taskId}`);
+      throw new Error(`Task with id ${taskId} not found.`);
+    }
+  } catch (error) {
+    console.error(
+      `[TaskRepository] Failed to delete task with id: ${taskId}`,
+      error
+    );
+    throw new Error(`Failed to delete task with id: ${taskId}.`);
+  }
 }
 
 export { saveTask, getAllTasks, deleteTask };
