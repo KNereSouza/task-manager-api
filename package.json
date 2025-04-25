@@ -1,5 +1,5 @@
 {
-  "name": "newapi",
+  "name": "task-manager-api",
   "version": "1.0.0",
   "description": "A simple web app to manage tasks.",
   "type": "module",
