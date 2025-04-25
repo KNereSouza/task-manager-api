@@ -1,11 +1,16 @@
 import CreateTaskService from "../services/CreateTaskService.js";
 
 export default class CreateTaskController {
+
+  constructor(createTaskService = new CreateTaskService()) {
+    this.createTaskService = createTaskService;
+  }
+
   /**
    * Handles the HTTP request to create a new task.
-   * @param   { Object } request - The HTTP request object.
+   * @param   { Object } request  - The HTTP request object.
    * @param   { Object } response - The HTTP response object.
-   * @returns { Promise<Object> } The HTTP response with the created task.
+   * @returns { Promise<Object> } - Returns a JSON response with the created task.
    */
   async handle(request, response) {
     // Extract task data from the request
@@ -13,12 +18,13 @@ export default class CreateTaskController {
 
     // Basic validation in the controller
     if (!name || !description) {
-      return response.status(400).json({ message: "All fields are required." });
+      return response.status(400).json({
+        message: "All fields are required."
+      });
     }
 
     try {
       // Use the service to create the task
-      const createTaskService = new CreateTaskService();
       const task = await createTaskService.handle({
         name,
         description,
@@ -32,16 +38,11 @@ export default class CreateTaskController {
       });
     } catch (error) {
       // Log the error for debugging
-      console.log("Error creating task:", error.message);
-
-      // Determine the appropriate status code based on the error
-      const statusCode =
-        error.message === "All fields are required." ? 400 : 500;
+      console.error("[at controllers layer] Failed to create a task", error);
 
       // Return an error response
-      return response.status(statusCode).json({
+      return response.status(500).json({
         message:
-          error.message ||
           "An unexpected error occurred. Please try again later.",
       });
     }
