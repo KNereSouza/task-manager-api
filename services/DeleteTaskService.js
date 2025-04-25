@@ -1,6 +1,14 @@
 import { deleteTask } from "../repositories/TaskRepository.js";
 
 export default class DeleteTaskService {
+
+    /**
+   * Handles the deletion of a task by its ID
+   * @param   { Object } params        - The parameters for the deletion
+   * @param   { string } params.taskId - The ID of the task to delete
+   * @returns { Promise<Object> }      - An object containing the success status, message, and deleted task ID
+   * @throws  { Error }                - If the task deletion fails
+   */
   async handle({ taskId }) {
     try {
       const data = await deleteTask(taskId);
