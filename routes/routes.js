@@ -1,4 +1,4 @@
-import { response, Router } from "express";
+import { Router } from "express";
 
 // Importing the Controller
 import CreateTaskController from "../controllers/CreateTaskController.js";
