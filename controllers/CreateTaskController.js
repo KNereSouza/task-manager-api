@@ -1,7 +1,6 @@
 import CreateTaskService from "../services/CreateTaskService.js";
 
 export default class CreateTaskController {
-
   constructor(createTaskService = new CreateTaskService()) {
     this.createTaskService = createTaskService;
   }
@@ -19,13 +18,13 @@ export default class CreateTaskController {
     // Basic validation in the controller
     if (!name || !description) {
       return response.status(400).json({
-        message: "All fields are required."
+        message: "All fields are required.",
       });
     }
 
     try {
       // Use the service to create the task
-      const task = await createTaskService.handle({
+      const task = await this.createTaskService.handle({
         name,
         description,
         status: "pending",
@@ -42,8 +41,7 @@ export default class CreateTaskController {
 
       // Return an error response
       return response.status(500).json({
-        message:
-          "An unexpected error occurred. Please try again later.",
+        message: "An unexpected error occurred. Please try again later.",
       });
     }
   }
