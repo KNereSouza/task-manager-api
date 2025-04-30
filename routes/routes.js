@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { response, Router } from "express";
 
 // Importing the Controller
 import CreateTaskController from "../controllers/CreateTaskController.js";
@@ -6,6 +6,7 @@ import GetAllTasksController from "../controllers/GetAllTasksController.js";
 import DeleteTaskController from "../controllers/DeleteTaskController.js";
 import SetTaskStatusController from "../controllers/SetTaskStatusController.js";
 import GetTaskByIdController from "../controllers/GetTaskByIdController.js";
+import GetTaskByStatusController from "../controllers/GetTasksByStatusController.js";
 
 // Create a new router instance
 const router = Router();
@@ -28,6 +29,12 @@ router.get("/tasks", async (request, response) => {
 // Route to get an task by it's ID
 router.get("/task", async (request, response) => {
   const controller = new GetTaskByIdController();
+  await controller.handle(request, response);
+});
+
+// Route to get an task by it's Status
+router.get("/tasks/:status", async (request, response) => {
+  const controller = new GetTaskByStatusController();
   await controller.handle(request, response);
 });
 
