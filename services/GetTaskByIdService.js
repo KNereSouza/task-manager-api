@@ -10,11 +10,7 @@ export default class GetTaskByIdService {
    */
   async handle({ taskId }) {
     try {
-      const data = await getTaskByID(taskId);
-      return {
-        sucess: true,
-        data,
-      };
+      return await getTaskByID(taskId);
     } catch (error) {
       console.error(
         `[at services layer] Failed to retrieve task with id: ${taskId}`,
