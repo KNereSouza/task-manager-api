@@ -1,7 +1,6 @@
 import DeleteTaskService from "../services/DeleteTaskService.js";
 
 export default class DeleteTaskController {
-
   constructor(deleteTaskService = new DeleteTaskService()) {
     this.deleteTaskService = deleteTaskService;
   }
@@ -26,18 +25,24 @@ export default class DeleteTaskController {
 
     try {
       // Use the service to delete the task
-      const data = await this.deleteTaskService.handle({ taskId })
+      const data = await this.deleteTaskService.handle({ taskId });
 
       // Return a success response
       return response.status(200).json(data);
     } catch (error) {
       // Log the error for debugging
-      console.error(`[at controllers layer] Failed to delete task with id: ${taskId}`, error);
+      console.error(
+        `[at controllers layer] Failed to delete task with id: ${taskId}`,
+        error
+      );
+      const statusCode = error.message.includes("not found") ? 404 : 500;
 
       // Return an error response
-      return response.status(500).json({
+      return response.status(statusCode).json({
         success: false,
-        message: "An unexpected error occurred while deleting the task.",
+        message:
+          error.message ||
+          "An unexpected error occurred while deleting the task.",
       });
     }
   }

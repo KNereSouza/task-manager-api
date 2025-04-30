@@ -22,7 +22,10 @@ async function saveTask(task) {
     await tasksCollection.insertOne(task.toJSON());
     console.log("Task saved to database:", task.toJSON());
   } catch (error) {
-    console.error("[at repositories layer] Error saving task to database:", error);
+    console.error(
+      "[at repositories layer] Error saving task to database:",
+      error
+    );
     throw new Error("Failed to save task to the database.");
   }
 }
@@ -74,7 +77,9 @@ async function deleteTask(taskId) {
       `[at repositories layer] Failed to delete task with id: ${taskId}`,
       error
     );
-    throw new Error(`Failed to delete task with id: ${taskId}.`);
+    throw new Error(
+      error.message || `Failed to delete task with id: ${taskId}.`
+    );
   }
 }
 
@@ -93,7 +98,7 @@ async function setTaskStatus(id, status) {
         status: status,
       },
     };
-    
+
     // Update the status of a task
     const result = await tasksCollection.updateOne(filter, updateDoc);
 
@@ -126,9 +131,7 @@ async function setTaskStatus(id, status) {
       `[at repositories layer] Error setting task status for ID '${id}' with status '${status}'`,
       error
     );
-    throw new Error(
-      `Failed to update task status with id: ${id}.`
-    );
+    throw new Error(`Failed to update task status with id: ${id}.`);
   }
 }
 

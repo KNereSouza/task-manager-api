@@ -1,8 +1,7 @@
 import { deleteTask } from "../repositories/TaskRepository.js";
 
 export default class DeleteTaskService {
-
-    /**
+  /**
    * Handles the deletion of a task by its ID
    * @param   { Object } params        - The parameters for the deletion
    * @param   { string } params.taskId - The ID of the task to delete
@@ -23,7 +22,8 @@ export default class DeleteTaskService {
         error
       );
       throw new Error(
-        `Failed to delete task with id: ${taskId}. Reason: ${error.message}`
+        error.message ||
+          `Failed to delete task with id: ${taskId}. Reason: ${error.message}`
       );
     }
   }
