@@ -1,6 +1,6 @@
 import { getTasksByStatus } from "../repositories/TaskRepository.js";
 
-export default class GetTaskByStatusService {
+export default class GetTasksByStatusService {
   async handle({ taskStatus }) {
     try {
       const data = await getTasksByStatus(taskStatus);
