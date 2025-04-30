@@ -164,4 +164,37 @@ async function getTaskByID(taskId) {
   }
 }
 
-export { saveTask, getAllTasks, deleteTask, setTaskStatus, getTaskByID };
+async function getTasksByStatus(status) {
+  try {
+    const data = await tasksCollection
+      .find({
+        status: { $eq: status },
+      })
+      .toArray();
+
+    if (data.length === 0) {
+      console.warn(
+        `[at repositories layer] No tasks found with status '${status}'.`
+      );
+    }
+
+    return data;
+  } catch (error) {
+    console.error(
+      `[at repositories layer] Error querying tasks with status '${status}':`,
+      error
+    );
+    throw new Error(
+      `Failed to query registers with status '${status}' from the database.`
+    );
+  }
+}
+
+export {
+  saveTask,
+  getAllTasks,
+  deleteTask,
+  setTaskStatus,
+  getTaskByID,
+  getTasksByStatus,
+};
