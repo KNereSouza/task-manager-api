@@ -1,13 +1,13 @@
 {
   "name": "task-manager-api",
   "version": "1.0.0",
-  "description": "A simple web app to manage tasks.",
+  "description": "A lightweight and modern RESTful API for managing tasks, built with Node.js, Express, and MongoDB.",
   "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch ."
   },
-  "author": "KNereS",
+  "author": "KNereSouza",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.5.0",
