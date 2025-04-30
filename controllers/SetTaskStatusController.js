@@ -1,7 +1,6 @@
 import SetTaskStatusService from "../services/SetTaskStatusService.js";
 
 export default class SetTaskStatusController {
-
   constructor(setTaskStatusService = new SetTaskStatusService()) {
     this.setTaskStatusService = setTaskStatusService;
   }
@@ -33,12 +32,13 @@ export default class SetTaskStatusController {
     // Validation of 'status'
     if (!status || typeof status !== "string") {
       // Log the error for debugging
-      console.error(`[at controllers layer] Invalid or missing 'status': ${status}`);
+      console.error(
+        `[at controllers layer] Invalid or missing 'status': ${status}`
+      );
 
       // Return an error response
       return response.status(400).json({
-        message:
-          "the field 'status' is required and must be a valid string.",
+        message: "the field 'status' is required and must be a valid string.",
       });
     }
 
@@ -73,7 +73,9 @@ export default class SetTaskStatusController {
 
       // Return an error response
       return response.status(statusCode).json({
-        message: "An unexpected error occurred. Please try again later.",
+        message:
+          error.message ||
+          "An unexpected error occurred. Please try again later.",
       });
     }
   }
