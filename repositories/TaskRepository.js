@@ -137,4 +137,31 @@ async function setTaskStatus(id, status) {
   }
 }
 
-export { saveTask, getAllTasks, deleteTask, setTaskStatus };
+/**
+ * Retrieves a task by its ID
+ * @param   { string } taskId   - The ID of the task to retrieve
+ * @returns { Promise<Object> } - The task object if found
+ * @throws  { Error }           - If the task is not found or the database query fails
+ */
+async function getTaskByID(taskId) {
+  try {
+    const result = await tasksCollection.findOne({ id: taskId });
+
+    if (!result) {
+      console.error(
+        `[at repositories layer] Task with id '${taskId}' not found.`
+      );
+      throw new Error(`Task with id '${taskId}' not found.`);
+    }
+
+    return result;
+  } catch (error) {
+    console.error(
+      `[at repositories layer] Error querying task with id '${taskId}':`,
+      error
+    );
+    throw new Error(error.message || `Failed to find task with id: ${taskId}.`);
+  }
+}
+
+export { saveTask, getAllTasks, deleteTask, setTaskStatus, getTaskByID };
